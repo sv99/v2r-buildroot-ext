@@ -1,0 +1,32 @@
+# Virt2real additional packages
+source "$BR2_EXTERNAL/package/virt2real/Config.in"
+
+source "$BR2_EXTERNAL/package/babeld/Config.in"
+source "$BR2_EXTERNAL/package/dejavu-fonts/Config.in"
+source "$BR2_EXTERNAL/package/gphoto2/Config.in"
+source "$BR2_EXTERNAL/package/gphotofs/Config.in"
+source "$BR2_EXTERNAL/package/libgphoto2/Config.in"
+source "$BR2_EXTERNAL/package/linuxconsoletools/Config.in"
+source "$BR2_EXTERNAL/package/ltwheelconf/Config.in"
+source "$BR2_EXTERNAL/package/miniupnp/Config.in"
+source "$BR2_EXTERNAL/package/miniupnpc/Config.in"
+source "$BR2_EXTERNAL/package/miredo/Config.in"
+source "$BR2_EXTERNAL/package/nanomsg/Config.in"
+source "$BR2_EXTERNAL/package/pjsip/Config.in"
+source "$BR2_EXTERNAL/package/pwnat/Config.in"
+source "$BR2_EXTERNAL/package/rfkill/Config.in"
+source "$BR2_EXTERNAL/package/uaputl/Config.in"
+source "$BR2_EXTERNAL/package/zbar/Config.in"
+
+# multimedia
+
+menu "V2R Audio and video applications"
+	source "$BR2_EXTERNAL/package/festival/Config.in"
+	source "$BR2_EXTERNAL/package/gst-rtsp-server/Config.in"
+	source "$BR2_EXTERNAL/package/gst-ti-dmai/Config.in"
+	source "$BR2_EXTERNAL/package/gst-usb/Config.in"
+	source "$BR2_EXTERNAL/package/gstd/Config.in"
+	source "$BR2_EXTERNAL/package/pocketsphinx/Config.in"
+	source "$BR2_EXTERNAL/package/sphinxbase/Config.in"
+	source "$BR2_EXTERNAL/package/v4l2grab/Config.in"
+endmenu

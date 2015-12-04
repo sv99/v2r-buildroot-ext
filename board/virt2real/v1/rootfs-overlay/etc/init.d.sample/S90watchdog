@@ -1,0 +1,22 @@
+#!/bin/sh
+
+case "$1" in
+start)
+
+    echo "Starting watchdog..."
+
+    # turn on watchdog script
+    /etc/virt2real/watchdog/watchdog.sh &
+    ;;
+
+stop)
+    ;;
+
+*)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+

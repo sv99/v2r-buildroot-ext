@@ -1,0 +1,10 @@
+menu "Virt2real additional packages"
+source "$BR2_EXTERNAL/package/virt2real/speech/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/nodejs_modules/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/teleguejs/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/gpio-event/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/rtsp-server/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/rcboard/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/i2c_write/Config.in"
+source "$BR2_EXTERNAL/package/virt2real/uflash/Config.in"
+endmenu

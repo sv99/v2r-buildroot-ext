@@ -1,0 +1,1 @@
+admin 1000 wheel 1000 =password /home/admin  /bin/bash users,sudo Default non-root user

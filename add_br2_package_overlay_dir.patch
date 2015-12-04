@@ -1,0 +1,46 @@
+diff --git a/Config.in b/Config.in
+index d795361..832f4b0 100644
+--- a/Config.in
++++ b/Config.in
+@@ -2,6 +2,9 @@
+ 
+ mainmenu "Buildroot $BR2_VERSION Configuration"
+ 
++config BR2_PACKAGE_OVERLAY_DIR
++	string "package overlay dir"
++
+ config BR2_HAVE_DOT_CONFIG
+ 	bool
+ 	default y
+diff --git a/Makefile b/Makefile
+index 86b9d0a..0b207c0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -218,6 +218,8 @@ ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
+ -include $(BR2_CONFIG)
+ endif
+ 
++BR_PACKAGE_OVERLAY_DIR := $(call qstrip,$(BR2_PACKAGE_OVERLAY_DIR))
++
+ # To put more focus on warnings, be less verbose as default
+ # Use 'make V=1' to see the full commands
+ ifeq ("$(origin V)", "command line")
+diff --git a/package/pkg-generic.mk b/package/pkg-generic.mk
+index 357a5c7..b6567df 100644
+--- a/package/pkg-generic.mk
++++ b/package/pkg-generic.mk
+@@ -349,6 +349,13 @@ endef
+ 
+ define inner-generic-package
+ 
++ifneq ($$(BR_PACKAGE_OVERLAY_DIR),)
++ifneq ($$(wildcard $$(BR_PACKAGE_OVERLAY_DIR)/$(1)/$(1).mk),)
++$$(warning Applying overlay for package $(1))
++include $$(BR_PACKAGE_OVERLAY_DIR)/$(1)/$(1).mk
++endif
++endif
++
+ # Ensure the package is only declared once, i.e. do not accept that a
+ # package be re-defined by a br2-external tree
+ ifneq ($(call strip,$(filter $(1),$(PACKAGES_ALL))),)
+
