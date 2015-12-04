@@ -7,7 +7,7 @@ v2_defconfig - v2r as remote control config
 
 ```
 cd /opt/virt2realsdk/fs
-make BR2_EXTERNAL=/vagrant/buildroot-v2r-v1 v1_defconfig
+make BR2_EXTERNAL=../v2r-buildroot-ext v2_defconfig
 cd ..
 make fsconfig
 make fsbuild
@@ -22,12 +22,13 @@ add_br2_package_overlay_dir.patch
 
 ```
 cd fs/
-git patch ../buildroot-v2r-v1/add_br2_package_overlay_dir.patch
+git apply < ../v2r-buildroot-ext/add_br2_package_overlay_dir.patch
 ...
 git checkout .
-git pull upstream master
-git patch  ../buildroot-v2r-v1/add_br2_package_overlay_dir.patch
+git pull origin master
+git apply < ../v2r-buildroot-ext/add_br2_package_overlay_dir.patch
 ```
+
 ## make image
 
 ```
