@@ -1,0 +1,7 @@
+config BR2_PACKAGE_GST_PIPEAPP
+	bool "gst-pipeapp"
+	select BR2_PACKAGE_GSTREAMER
+	help
+	 Library and test application for gstreamer appsink new-buffer callback.
+	 
+	 https://github.com/sv99/gst-pipeapp
