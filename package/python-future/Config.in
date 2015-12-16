@@ -1,12 +1,12 @@
-config BR2_PACKAGE_PYTHON_ENUM
-	bool "python-enum"
+config BR2_PACKAGE_PYTHON_FUTURE
+	bool "python-future"
 	depends on BR2_PACKAGE_PYTHON
 	help
-	  Robust enumerated type support in Python
+	  Clean single-source support for Python 3 and 2
 
-	  An enumeration object is an immutable sequence object built
-	  from a sequence of strings. Each value is also available as
-	  an attribute. Such values are constant. Comparisons and
-	  enumeration are supported.
+	  future is the missing compatibility layer between Python 2
+	  and Python 3. It allows you to use a single, clean 
+	  Python 3.x-compatible codebase to support both Python 2 and
+	  Python 3 with minimal overhead.
 
-	  https://pypi.python.org/pypi/enum
+	  https://pypi.python.org/pypi/future
