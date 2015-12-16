@@ -1,15 +1,10 @@
 # coding: utf-8
 from __future__ import unicode_literals, print_function, division, absolute_import, with_statement
 
-import os
-import time
-import math
-import json
+import logging
 
 from concurrent.futures import ThreadPoolExecutor
 from tornado.log import app_log
-from tornado.concurrent import Future
-from tornado import gen
 from tornado.ioloop import IOLoop
 
 # load libgstpipeapp
@@ -43,8 +38,13 @@ class GstreamerManager(object):
         self.params = app.params
         self._played = False
 
+        # init pipeline
+        pipeline = None
+        if app.settings['pipeline_file'] != "":
+            pipeline = app.settings['pipeline']
+        _lib.pipeapp_init(ct.create_string_buffer(pipeline))
+
         # frame callback
-        _lib.pipeapp_init(None)
         CALLBACKFUNC = ct.CFUNCTYPE(ct.c_int, ct.c_int, ct.c_void_p, ct.py_object)
         self.my_callback = CALLBACKFUNC(callback)
         _lib.pipeapp_set_callback(self.my_callback, ct.py_object(app))

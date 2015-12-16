@@ -85,6 +85,7 @@ class Application(tornado.web.Application):
                 if result != "":
                     result += " ! "
                 result += line
+        app_log.info("pipline from %s: %s", file_name, result)
         return result
 
     @tornado.gen.coroutine

@@ -2,6 +2,7 @@
 # coding: utf-8
 from __future__ import unicode_literals, print_function, division, absolute_import
 
+import logging
 import tornado.ioloop
 import tornado.autoreload
 from tornado.log import app_log, enable_pretty_logging
@@ -25,7 +26,9 @@ def main():
     )
     app = remotecontrol.app.Application(settings)
     options.logging = str('DEBUG')
-    enable_pretty_logging()
+    enable_pretty_logging(options)
+    app_log.setLevel(logging.DEBUG)
+
     server = HTTPServer(app)
     server.listen(options.port, options.host)
     app_log.info("Listen on http://%s:%d/" % (
