@@ -4,4 +4,4 @@ config BR2_PACKAGE_PYTHON_FUTURES
 	help
 	  Backport of the concurrent.futures package from Python 3.2
 
-	  https://pypi.python.org/pypi/future
+	  https://pypi.python.org/pypi/futures
