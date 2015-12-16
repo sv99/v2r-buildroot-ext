@@ -1,0 +1,65 @@
+.bold {
+  font-weight: bold;
+}
+.target {
+  padding: 20px;
+  height: auto;
+  width: auto;
+}
+.centered-text {
+  text-align: center;
+}
+.frame {
+  background-color: #777;
+}
+.frame-btn {
+  margin-bottom: 20px;
+}
+.frame-btn canvas {
+  border-radius: 6px;
+}
+.frame-btn .label {
+  position: absolute;
+  left: 15px;
+  /* sam as column padding-left*/
+  top: 0;
+  font-size: 18px;
+}
+.well-margin-top {
+  margin-top: 20px;
+}
+.btn-toolbar {
+  margin-bottom: 20px;
+}
+.h3-margin-top {
+  margin-top: 10px;
+}
+.inner {
+  /*background-color: #ffffff;*/
+  /*border-radius:10px;*/
+  padding: 10px;
+}
+.sidebar {
+  height: 100%;
+  /*    min-height: 600px;
+      bottom: 0;
+      right: 0;
+      z-index: 1000;
+      display: block;
+      padding: 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      /*padding-bottom: 100%;*/
+  /*margin-bottom: -100%;*/
+}
+.ls-time-tick {
+  padding-right: 10px;
+}
+.img-target {
+  max-height: 600px;
+}
+.img-view {
+  max-width: 450px;
+}
+
+/*# sourceMappingURL=style.css.map */
