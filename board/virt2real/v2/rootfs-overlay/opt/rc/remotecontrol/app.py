@@ -29,25 +29,27 @@ __author__ = 'svolkov'
 SEND_IR_SCRIPT = "send-ir.sh"
 
 class Application(tornado.web.Application):
-    def __init__(self):
+    def __init__(self, settings):
         # WebSocket connections pools
         self.ws_pool = []
 
         self.dbfile = "db/chat.sqlite"
 
-        settings = dict(
-            static_url_prefix='/static/',
-            template_path=os.path.join(os.path.dirname(__file__), "templates"),
-            static_path=os.path.join(os.path.dirname(__file__), "static"),
-            img_path=os.path.join(os.path.dirname(__file__), "static", "img"),
-            default_handler_class=ErrorHandler,
-            default_handler_args=dict(status_code=404),
-            xsrf_cookies=True,
-            # cookie_secret = COOKIE_SECRET,
-            # login_url = "/auth/signin",
-            autoescape=None,
-            debug=True
-        )
+        settings['static_url_prefix'] = '/static/'
+        file_dir = os.path.dirname(__file__)
+        settings['template_path'] = os.path.join(file_dir, "templates")
+        settings['static_path'] = os.path.join(file_dir, "static")
+        settings['img_path'] = os.path.join(file_dir, "static", "img")
+        settings['default_handler_class'] = ErrorHandler
+        settings['default_handler_args'] = dict(status_code=404)
+        settings['xsrf_cookies'] = True
+        # settings['cookie_secret'] = COOKIE_SECRET
+        # settings['login_url'] = "/auth/signin"
+        settings['autoescape'] = None
+        settings['debug'] = True
+
+        if settings['pipeline_file'] != "":
+            settings['pipeline'] = self.read_pipeline(settings['pipeline_file'])
         # settings['no_video_jpg'] = self.get_image(settings, 'no_video_320x240.jpg')
         # settings['target_clean'] = self.get_image(settings, 'target.jpg')
         # settings['target_work'] = self.clone_image(settings['target_clean'])
@@ -69,6 +71,21 @@ class Application(tornado.web.Application):
         self.manager = GstreamerManager(self)
 
         self._frame_tick = False
+
+    @staticmethod
+    def read_pipeline(file_name):
+        file_path = os.path.join(os.path.curdir, file_name)
+        result = ""
+        with open(file_path, 'r') as f:
+            for line in f.read().splitlines():
+                # comments
+                if line[0] == '#':
+                    continue
+                # first line
+                if result != "":
+                    result += " ! "
+                result += line
+        return result
 
     @tornado.gen.coroutine
     def send_ws_message(self, message, binary=False):

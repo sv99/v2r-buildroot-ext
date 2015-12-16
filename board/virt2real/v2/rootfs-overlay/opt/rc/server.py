@@ -14,12 +14,16 @@ __author__ = 'svolkov'
 
 define("host", default="", help="v2r remote control", type=str)
 define("port", default=8888, help="run on the given port", type=int)
+define("pipeline", default="", help="pipeline text file", type=str)
 
-app = remotecontrol.app.Application()
-
+app = None
 
 def main():
     parse_command_line()
+    settings = dict(
+        pipeline_file=options.pipeline
+    )
+    app = remotecontrol.app.Application(settings)
     options.logging = str('DEBUG')
     enable_pretty_logging()
     server = HTTPServer(app)
