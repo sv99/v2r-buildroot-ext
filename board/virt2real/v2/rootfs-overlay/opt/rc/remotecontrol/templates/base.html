@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Laser Shoter">
+    <meta name="author" content="S.Volkov sv99@inbox.ru">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>V2R Remote Control</title>
+    <link rel="stylesheet" href="{{static_url('vendor/font-awesome/css/font-awesome.min.css')}}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{static_url('vendor/bootstrap/dist/css/bootstrap.min.css')}}">
+    <!-- Bootstrap Vertical Tabs CSS -->
+    <link rel="stylesheet" href="{{static_url('vendor/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css')}}">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{{static_url('css/style.css')}}">
+
+</head>
+
+<body>
+<!-- Static top navbar -->
+<header class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <!-- Title -->
+        <div class="navbar-header pull-left">
+          <a class="navbar-brand" href="/">V2R Remote Control</a>
+        </div>
+
+        <!-- 'Sticky' (non-collapsing) right-side menu item(s) -->
+        <div class="navbar-header pull-right">
+            <p id="ls-time-tick" class="nav navbar-text pull-left ls-time-tick">{{time_tick}}</p>
+          <!-- Required bootstrap placeholder for the collapsed menu -->
+          <button type="button" class="navbar-toggle"
+                  data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li {% if __name__=="index_html" %}class="active" {% end %}><a href="/">
+                    <span class="fa fa-home"></span>
+                    Home</a>
+                </li>
+                <li {% if __name__=="settings_html" %}class="active" {% end %}><a href="settings">
+                    <span class="fa fa-cog"></span>
+                    Settings</a>
+                </li>
+                <li {% if __name__=="help_html" %}class="active" {% end %}><a href="help">
+                    <span class="fa fa-life-ring"></span>
+                    Help</a>
+                </li>
+            </ul>
+        </div>
+
+   </div>
+</header>
+
+<div class="container">
+    {% block content %}{% end %}
+    {% block bottom %}{% end %}
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{{static_url('vendor/jquery/dist/jquery.min.js')}}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed  -->
+<script src="{{static_url('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="{{static_url('js/remotecontrol.js')}}"></script>
+{% block customjs %}
+{% end %}
+</body>
+</html>
