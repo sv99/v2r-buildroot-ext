@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PYTHON_SQLALCHEMY
+	bool "python-sqlalchemy"
+	depends on BR2_PACKAGE_PYTHON
+	help
+	  Database Abstraction Library
+
+	  The Python SQL Toolkit and Object Relational Mapper
+
+	  https://pypi.python.org/pypi/sqlalchemy
