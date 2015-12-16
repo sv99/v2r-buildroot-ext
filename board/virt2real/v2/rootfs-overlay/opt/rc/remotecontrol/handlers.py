@@ -24,7 +24,7 @@ class BaseHandler(tornado.web.RequestHandler):
     def get_template_namespace(self):
         """Add time_tick variable"""
         namespace = super(BaseHandler, self).get_template_namespace()
-        namespace['time_tick'] = get_time_tick()
+        namespace['time_tick'] = self.application.get_time_tick()
         return namespace
 
     def write_error(self, status_code, **kwargs):

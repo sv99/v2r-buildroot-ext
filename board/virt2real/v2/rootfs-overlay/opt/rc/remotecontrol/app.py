@@ -92,8 +92,13 @@ class Application(tornado.web.Application):
     # --------------------------------
     def second_tick(self):
         # self.manager.on_tick()
-        self.send_command('time', get_time_tick())
+        self.send_command('time', self.get_time_tick())
         self._frame_tick = True
+
+    @staticmethod
+    def get_time_tick():
+        t = time.localtime()
+        return "%02d:%02d:%02d" % (t.tm_hour, t.tm_min, t.tm_sec)
 
     def send_command(self, command, value=""):
         # app_log.debug("send_command: {}".format(command))
@@ -113,11 +118,6 @@ class Application(tornado.web.Application):
         file_path = os.path.join(self.settings['img_path'], filename)
         with open(file_path, 'rb') as f:
             return f.read()
-
-
-def get_time_tick():
-    t = time.localtime()
-    return "%02d:%02d:%02d" % (t.tm_hour, t.tm_min, t.tm_sec)
 
 
 def exec_script(script_name, params):
