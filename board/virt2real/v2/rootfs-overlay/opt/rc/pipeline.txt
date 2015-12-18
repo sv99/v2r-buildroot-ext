@@ -1,7 +1,10 @@
 # each line -  single pipe slot
 # will be separated by " ! "
+# hd pipeline
 v4l2src always-copy=false chain-ipipe=true
-capsfilter caps=video/x-raw-yuv,format=\(fourcc\)NV12,width=640,height=480,framerate=5/1
+capsfilter caps=video/x-raw-yuv,format=\(fourcc\)NV12,width=640,height=480
+videorate
+video/x-raw-yuv,framerate=5/1
 dmaiaccel
 dmaienc_jpeg copyOutput=true
 appsink name=sink drop=true

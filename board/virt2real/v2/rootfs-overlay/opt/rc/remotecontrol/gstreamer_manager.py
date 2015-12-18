@@ -41,8 +41,8 @@ class GstreamerManager(object):
         # init pipeline
         pipeline = None
         if app.settings['pipeline_file'] != "":
-            pipeline = app.settings['pipeline']
-        _lib.pipeapp_init(ct.create_string_buffer(pipeline))
+            pipeline = ct.create_string_buffer(app.settings['pipeline'])
+        _lib.pipeapp_init(pipeline)
 
         # frame callback
         CALLBACKFUNC = ct.CFUNCTYPE(ct.c_int, ct.c_int, ct.c_void_p, ct.py_object)
