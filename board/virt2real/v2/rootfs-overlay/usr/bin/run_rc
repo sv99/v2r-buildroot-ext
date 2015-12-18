@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd /opt/rc
+
+/usr/bin/python server.py --pipeline=pipeline.txt
+
