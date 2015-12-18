@@ -17,7 +17,10 @@ for i in $locales ; do
 done
 
 # remove dhcpd from startup
-mv ${TARGETDIR}/etc/init.d/S80dhcp-server ${TARGETDIR}/etc/init.d.sample/
+if [ -f ${TARGETDIR}/etc/init.d/S80dhcp-server ];
+then
+    mv ${TARGETDIR}/etc/init.d/S80dhcp-server ${TARGETDIR}/etc/init.d.sample/
+fi
 
 # Copy the rootfs additions
 # cp -r $BOARDDIR/rootfs-additions/* $TARGETDIR.swp
