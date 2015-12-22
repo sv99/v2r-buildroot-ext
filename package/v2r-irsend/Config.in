@@ -1,0 +1,7 @@
+config BR2_PACKAGE_V2R_IRSEND
+	bool "v2r-irsend"
+	select BR2_PACKAGE_V2R_IRSEND
+	help
+	 Send ir command with pulse data from command line.
+	 
+	 https://github.com/sv99/v2r-irsend

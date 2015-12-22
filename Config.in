@@ -34,5 +34,6 @@ menu "V2R Audio and video applications"
 	source "$BR2_EXTERNAL/package/gstd/Config.in"
 	source "$BR2_EXTERNAL/package/pocketsphinx/Config.in"
 	source "$BR2_EXTERNAL/package/sphinxbase/Config.in"
+    source "$BR2_EXTERNAL/package/v2r-irsend/Config.in"
 #	source "$BR2_EXTERNAL/package/v4l2grab/Config.in"
 endmenu
