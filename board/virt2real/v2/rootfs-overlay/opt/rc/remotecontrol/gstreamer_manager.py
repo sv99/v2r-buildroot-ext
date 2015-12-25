@@ -40,7 +40,7 @@ class GstreamerManager(object):
 
         # init pipeline
         pipeline = None
-        if app.settings['pipeline_file'] != "":
+        if app.settings.get('pipeline_file', "") != "":
             pipeline = ct.create_string_buffer(app.settings['pipeline'])
         _lib.pipeapp_init(pipeline)
 

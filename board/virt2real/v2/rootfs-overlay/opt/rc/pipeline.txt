@@ -2,7 +2,7 @@
 # will be separated by " ! "
 # hd pipeline
 v4l2src always-copy=false chain-ipipe=true
-capsfilter caps=video/x-raw-yuv,format=\(fourcc\)NV12,width=1280,height=720
+capsfilter caps=video/x-raw-yuv,format=\(fourcc\)NV12,width=640,height=480
 videorate
 video/x-raw-yuv,framerate=5/1
 dmaiaccel

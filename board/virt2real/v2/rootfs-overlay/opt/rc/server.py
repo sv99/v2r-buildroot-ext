@@ -9,6 +9,7 @@ from tornado.log import app_log, enable_pretty_logging
 from tornado.httpserver import HTTPServer
 from tornado.options import define, options, parse_command_line
 
+import remotecontrol
 import remotecontrol.app
 
 __author__ = 'svolkov'
@@ -31,6 +32,7 @@ def main():
 
     server = HTTPServer(app)
     server.listen(options.port, options.host)
+    app_log.info("Version: %s from: %s" % (remotecontrol.VERSION, remotecontrol.VERSION_DATE))
     app_log.info("Listen on http://%s:%d/" % (
         options.host if options.host != "" else "localhost",
         options.port)

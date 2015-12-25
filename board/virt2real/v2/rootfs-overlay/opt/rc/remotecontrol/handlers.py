@@ -87,6 +87,32 @@ class MainHandler(BaseHandler):
             self.render('index.html', manager=self.application.manager)
 
 
+class RemotesHandler(BaseHandler):
+    @tornado.gen.coroutine
+    def get(self):
+        if self.is_ajax():
+            # ajax request
+            if 'command' in self.request.arguments:
+                command = self.request.arguments['command'][0]
+                if command == "update_status":
+                    self.write(self.application.manager.status_as_json())
+                elif command == "get_params":
+                    self.write(self.application.params.as_json())
+                elif command == "preview_toggle":
+                    IOLoop.current().spawn_callback(
+                            self.application.manager.preview_toggle)
+                elif command == "send_ir":
+                    if 'button' in self.request.arguments:
+                        button = self.request.arguments['button'][0]
+                        IOLoop.current().spawn_callback(
+                                lambda: self.application.send_ir(button))
+                else:
+                    app_log.debug("MainHandler ajax unknown handler: " + command)
+                    self.write("error")
+        else:
+            self.render('remotes.html', manager=self.application.manager)
+
+
 class HelpHandler(BaseHandler):
     def get(self):
         self.render('help.html')

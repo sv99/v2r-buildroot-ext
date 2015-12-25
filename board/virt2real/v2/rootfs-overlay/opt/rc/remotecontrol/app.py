@@ -13,20 +13,24 @@ import tornado.ioloop
 import tornado.websocket
 from tornado.log import app_log
 
+import remotecontrol
 from remotecontrol.handlers import (
     ErrorHandler,
     MainHandler,
+    RemotesHandler,
     HelpHandler,
     SettingsHandler,
     WSHandler
 )
+from remotecontrol.lircd import ConfigReader
 from remotecontrol.params import Params
 from remotecontrol.gstreamer_manager import GstreamerManager
 
 __author__ = 'svolkov'
 
 
-SEND_IR_SCRIPT = "send-ir.sh"
+# SEND_IR_SCRIPT = "send-ir.sh"
+SEND_IR_SCRIPT = "v2r-irsend"
 
 class Application(tornado.web.Application):
     def __init__(self, settings):
@@ -37,8 +41,12 @@ class Application(tornado.web.Application):
 
         settings['static_url_prefix'] = '/static/'
         file_dir = os.path.dirname(__file__)
+        settings['VERSION'] = remotecontrol.VERSION
+        settings['VERSION_DATE'] = remotecontrol.VERSION_DATE
         settings['template_path'] = os.path.join(file_dir, "templates")
         settings['static_path'] = os.path.join(file_dir, "static")
+        settings['scripts_path'] = os.path.join(file_dir, "../scripts")
+        settings['lircd_path'] = os.path.join(file_dir, "../lircd")
         settings['img_path'] = os.path.join(file_dir, "static", "img")
         settings['default_handler_class'] = ErrorHandler
         settings['default_handler_args'] = dict(status_code=404)
@@ -48,16 +56,17 @@ class Application(tornado.web.Application):
         settings['autoescape'] = None
         settings['debug'] = True
 
-        if settings['pipeline_file'] != "":
+        # parse lircd configs
+        reader = ConfigReader(settings['lircd_path'])
+        reader.parse()
+        settings['remotes'] = reader.remotes
+
+        if settings.get('pipeline_file', "") != "":
             settings['pipeline'] = self.read_pipeline(settings['pipeline_file'])
-        # settings['no_video_jpg'] = self.get_image(settings, 'no_video_320x240.jpg')
-        # settings['target_clean'] = self.get_image(settings, 'target.jpg')
-        # settings['target_work'] = self.clone_image(settings['target_clean'])
-        # settings['target_sheet'] = self.get_image(settings, 'no_video.jpg')
-        # settings['target_200'] = self.get_image(settings, 'target_200.png')
 
         handlers = (
             (r'/', MainHandler),
+            (r'/remotes', RemotesHandler),
             (r'/help', HelpHandler),
             (r'/settings', SettingsHandler),
             (r'/ws/?', WSHandler, dict(pool=self.ws_pool)),
@@ -98,12 +107,15 @@ class Application(tornado.web.Application):
     def send_ir(self, button):
         """call external script which send ir command"""
         app_log.debug("send_ir -> %s", button)
-        script_path = os.path.join(os.path.curdir, SEND_IR_SCRIPT)
+        # script_path = os.path.join(os.path.curdir, SEND_IR_SCRIPT)
         # parse button to device and button
         sep = button.index('-')
-        device = button[:sep]
+        device = button[:sep].upper()
         key = button[sep + 1:]
-        Popen([script_path, device, key])
+        key = key.replace('-', '_').upper()
+        pulses = self.settings['remotes'][device].get_pulses(key)
+        # params = [SEND_IR_SCRIPT] + pulses.split()
+        Popen([SEND_IR_SCRIPT] + pulses.split())
 
     # --------------------------------
     # periodic send time tick callback
