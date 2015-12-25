@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "Init irsend and relay gpio..."
+modprobe v2r_irsend
+echo "set gpio 08 output 0" > /dev/v2r_gpio
+echo "set gpio 09 output 0" > /dev/v2r_gpio
+
