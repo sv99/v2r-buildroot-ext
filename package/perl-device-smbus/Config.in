@@ -1,6 +1,11 @@
 config BR2_PACKAGE_PERL_DEVICE_SMBUS
 	bool "perl-device-smbus"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_MOO
 	help
 	  Control and read hardware devices with i2c(SMBus)
 
 	  https://metacpan.org/release/Device-SMBus
+
+comment "perl-device-smbus needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
