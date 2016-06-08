@@ -21,16 +21,12 @@ use constant {
 has 'videoStd' => (
     is         => 'ro',
     lazy_build => 1,
+    builder => '_build_videoStd',
 );
 
 sub _build_videoStd {
     my ($self) = @_;
     $self->readByteData(CTRL_VID_STD);
-}
-
-sub readByte {
-    my ($self) = @_;
-    $self->readByteData($_[1]);
 }
 
 1;
