@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_DEVICE_I2C
+	bool "perl-device-i2c"
+	depends on !BR2_STATIC_LIBS
+	help
+	  Control and read hardware devices with i2c(SMBus)
+
+	  https://metacpan.org/release/Device-I2C
+
+comment "perl-device-i2c needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

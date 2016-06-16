@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PERL_DEVICE_I2C_ADV7611
+	bool "perl-device-i2c-adv7611"
+	depends on !BR2_STATIC_LIBS
+	select BR2_PACKAGE_PERL_DEVICE_I2C
+	help
+	  I2C interface to ADV7611 using Device::I2C
+
+	  https://metacpan.org/release/Device-I2C-ADV7611
+
+comment "perl-device-i2c-adv7611 needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS

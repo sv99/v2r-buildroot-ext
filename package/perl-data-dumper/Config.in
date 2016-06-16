@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PERL_DATA_DUMPER
+	bool "perl-data-dumper"
+	depends on !BR2_STATIC_LIBS
+	help
+	  stringified perl data structures, suitable for both printing and eval
+
+	  https://metacpan.org/release/Data-Dumper
+
+comment "perl-data-dumper needs a toolchain w/ dynamic library"
+	depends on BR2_STATIC_LIBS
