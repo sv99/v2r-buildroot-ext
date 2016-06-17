@@ -14,8 +14,8 @@ if ( !$dev->checkDevice(Device::I2C::ADV7611->CTRL_IO) ) {
 }
 
 $dev->writeIO(0x40, 0x81);
-$dev->writeIO(0x01, 0x05); # TV Frameformat
-$dev->writeIO(0x00, 0x19); # 720p with 2x1 decimation
+$dev->writeIO(0x01, 0x05); # PRIM_MODE HDMI component
+$dev->writeIO(0x00, 0x1c); # HD 2x1 1250 1920 × 1080
 $dev->writeIO(0x02, 0xf5); # YUV out
 $dev->writeIO(0x03, 0x00);
 $dev->writeIO(0x05, 0x2c);
