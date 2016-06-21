@@ -7,7 +7,7 @@ my $dev = Device::I2C::ADV7611->new('/dev/i2c-1');
 
 sub print_param {
     my ($name, $value) = @_;
-    printf("%s: 0x%02x\n", $name, $value, $value);
+    printf("%s: %d(0x%02x)\n", $name, $value, $value);
 }
 
 printf("no power: 0x%02x\n", $dev->noPower());
