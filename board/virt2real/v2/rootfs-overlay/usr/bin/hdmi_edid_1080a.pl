@@ -13,7 +13,7 @@ if ( !$dev->checkDevice(Device::I2C::ADV7611->CTRL_IO) ) {
     croak "Device Not available";
 }
 
-$dev->writeIO(0x40, 0x81); # set interrupt
+$dev->writeIO(0x40, 0xa1); # set interrupt
 $dev->writeIO(0x01, 0x05); # PRIM_MODE HDMI component
 $dev->writeIO(0x00, 0x1c); # HD 2x1 1250 1920 × 1080
 $dev->writeIO(0x02, 0xf5); # YUV out
