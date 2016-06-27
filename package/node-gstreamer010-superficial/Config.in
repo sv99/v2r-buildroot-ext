@@ -1,0 +1,8 @@
+config BR2_PACKAGE_NODE_GSTREAMER010_SUPERFICIAL
+	bool "node-gstreamer010-superficial"
+	depends on BR2_PACKAGE_NODEJS
+	depends on BR2_PACKAGE_GSTREAMER
+	help
+	  Backport Node.JS Superficial GStreamer binding to gstreamer-0.10.
+
+	  https://github.com/sv99/node-gstreamer010-superficial
