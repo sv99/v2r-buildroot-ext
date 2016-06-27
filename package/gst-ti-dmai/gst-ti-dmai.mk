@@ -5,7 +5,7 @@
 ################################################################################
 
 GST_TI_DMAI_VERSION = master
-GST_TI_DMAI_SITE = http://github.com/virt2real/gst-ti-dmai/tarball/$(GST_TI_DMAI_VERSION)
+GST_TI_DMAI_SITE = http://github.com/sv99/gst-ti-dmai/tarball/$(GST_TI_DMAI_VERSION)
 GST_TI_DMAI_INSTALL_STAGING = YES
 GST_TI_DMAI_DEPENDENCIES = gstreamer host-pkgconf
 GST_TI_DMAI_AUTORECONF = YES
