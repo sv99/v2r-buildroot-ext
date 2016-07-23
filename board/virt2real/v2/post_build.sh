@@ -24,3 +24,19 @@ fi
 
 # Copy the rootfs additions
 # cp -r $BOARDDIR/rootfs-additions/* $TARGETDIR.swp
+
+# make dir /boot
+if [ ! -d "${TARGETDIR}/boot" ]
+then 
+    mkdir "${TARGETDIR}/boot"
+fi
+
+# mount boot record in the /etc/fstab
+if grep "mmcblk0p1" "${TARGETDIR}/etc/fstab" > /dev/null
+then
+echo "/dev/mmcblk0p1 exists in the /etc/fstab"
+else
+cat << 'EOF' >> "${TARGETDIR}/etc/fstab"
+/dev/mmcblk0p1	/boot		vfat	defaults	0	2
+EOF
+fi
