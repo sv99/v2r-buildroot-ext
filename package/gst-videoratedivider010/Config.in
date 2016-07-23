@@ -1,0 +1,7 @@
+config BR2_PACKAGE_GST_VIDEORATEDIVIDER010
+	bool "gst-vidoratedivider010"
+	select BR2_PACKAGE_GSTREAMER
+	help
+	 Simple GStreamer plugin for stream downsampling.
+	 
+	 https://github.com/sv99/gst-videoratedivider010

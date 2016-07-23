@@ -1,0 +1,11 @@
+#############################################################
+#
+# Gstreamer videoratedivider plugin
+#
+#############################################################
+GST_VIDEORATEDIVIDER010_VERSION = v0.1.1
+GST_VIDEORATEDIVIDER010_SITE = $(call github,sv99,gst-videoratedivider010,$(GST_PIPEAPP_VERSION))
+GST_VIDEORATEDIVIDER010_INSTALL_TARGET = YES
+GST_VIDEORATEDIVIDER010_DEPENDENCIES = gstreamer gst-plugins-base
+
+$(eval $(cmake-package))
