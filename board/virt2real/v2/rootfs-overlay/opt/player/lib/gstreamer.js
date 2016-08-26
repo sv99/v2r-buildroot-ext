@@ -24,9 +24,13 @@ var GstreamerServer = new Class({
 
   start_feed : function(){
     var self = this;
-    var cmd = "videotestsrc num-buffers=200 ! " +
-              "video/x-raw-rgb,width=640,height=480,framerate=10/1 ! " +
-              "ffmpegcolorspace ! appsink name=sink";
+    var cmd = "v4l2src always-copy=false chain-ipipe=true  ! " +
+              "capsfilter caps=video/x-raw-yuv,format=\(fourcc\)NV12,width=1920,height=1088,framerate=\(fraction\)24/1 ! " +
+              "dmaiaccel ! videoratedivider factor=12 ! " +
+              "dmaienc_h264 idrinterval=90 intraframeinterval=30 ratecontrol=2 encodingpreset=3 " +
+              "profile=66 level=31 t8x8intra=0 t8x8inter=0 entropy=0 seqscaling=0 ddrbuf=true " +
+              "single-nalu=true bytestream=true  !videotestsrc num-buffers=200 ! " +
+              "appsink name=sink";
     console.log(cmd);
 
     var pipeline = new gstreamer.Pipeline(cmd);

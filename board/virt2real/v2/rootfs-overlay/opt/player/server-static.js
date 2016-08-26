@@ -29,8 +29,8 @@ source = {
   width     : 1920,
   height    : 1088,
 
-  video_path     : "samples/out.h264",
-  video_duration : 24
+  video_path     : "samples/out_div.h264",
+  video_duration : 2
 };
 
 
