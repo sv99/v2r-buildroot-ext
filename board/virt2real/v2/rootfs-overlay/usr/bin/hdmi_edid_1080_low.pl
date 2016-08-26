@@ -14,7 +14,7 @@ if ( !$dev->checkDevice(Device::I2C::ADV7611->CTRL_IO) ) {
 }
 
 $dev->writeIO(0x40, 0xa1); # set interrupt
-$dev->writeIO(0x01, 0x05); # PRIM_MODE HDMI component
+$dev->writeIO(0x01, 0x25); # PRIM_MODE HDMI component
 $dev->writeIO(0x00, 0x1c); # HD 2x1 1250 1920 × 1080
 $dev->writeIO(0x02, 0xf5); # YUV out
 $dev->writeIO(0x03, 0x00);
@@ -33,6 +33,8 @@ $dev->writeIO(0x33, 0x40);
 
 $dev->initAddressMaps();
 
+# Set DIS_AUTO_PARAM_BUFF
+$dev->writeCP(0xc9, 0x2d);
 # Force HDMI free run
 $dev->writeCP(0xba, 0x01);
 
